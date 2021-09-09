@@ -1,3 +1,32 @@
 {
-  "port": 3000
+  "port": 3000,
+  "db": {
+    "database": "chat_and_go",
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "1234",
+    "connectionLimit": 10
+  },
+  "room": {
+    "name": {
+      "min": 1,
+      "max": 36
+    },
+    "password": {
+      "min": 4,
+      "max": 16
+    }
+  },
+  "member": {
+    "name": {
+      "min": 1,
+      "max": 36
+    }
+  },
+  "message": {
+    "min": 1,
+    "max": 256
+  }
 }
+

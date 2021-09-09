@@ -1,11 +1,16 @@
 const http = require('http');
 const express = require('express');
+
+const {port} = require('config');
+
+const Room = require('../models/room.js');
+const Member = require('../models/member.js');
+const Message = require('../models/message.js');
+
+
 const app = express();
 
-const config = require('config');
-
 if (process.env.NODE_ENV === 'development') {
-    console.log('DEV');
     const livereload = require("livereload");
     const connectLiveReload = require("connect-livereload");
 
@@ -21,9 +26,10 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.sendFile(rootDir + '/views/index.html');
 })
 
 const server = http.createServer(app);
-server.listen(config.port);
+server.listen(port);
+
