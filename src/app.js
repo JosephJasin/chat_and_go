@@ -1,14 +1,20 @@
 const http = require('http');
 const express = require('express');
 
+const {Server: SocketIoServer} = require('socket.io');
+
 const {port} = require('config');
+
+const handlers = require('./eventHandlers.js');
 
 const Room = require('../models/room.js');
 const Member = require('../models/member.js');
 const Message = require('../models/message.js');
 
-
 const app = express();
+
+const server = http.createServer(app);
+const io = new SocketIoServer(server);
 
 if (process.env.NODE_ENV === 'development') {
     const livereload = require("livereload");
@@ -30,6 +36,10 @@ app.get('/', async (req, res) => {
     res.sendFile(rootDir + '/views/index.html');
 })
 
-const server = http.createServer(app);
+io.on('connection', socket => {
+
+});
+
+
 server.listen(port);
 
