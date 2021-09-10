@@ -37,9 +37,9 @@ app.get('/', async (req, res) => {
 })
 
 io.on('connection', socket => {
-
+    handlers.registerRoomHandler(io, socket);
+    handlers.registerReconnectHandler(io, socket);
 });
-
 
 server.listen(port);
 

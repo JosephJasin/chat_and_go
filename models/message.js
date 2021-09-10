@@ -1,5 +1,6 @@
 const {message} = require("config");
 
+//TODO: Add custom errors
 class Message {
     /**
      * @param content : string

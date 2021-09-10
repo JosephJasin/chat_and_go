@@ -1,6 +1,7 @@
 const {v4: getRandStr} = require("uuid");
 const {member} = require("config");
 
+//TODO: Add custom errors
 class Member {
     /**
      * @param name : string
@@ -13,7 +14,6 @@ class Member {
         this.id = id;
 
     }
-
 
     validateName = () => {
         if (this.name.length < member.name.min) throw Error('');
@@ -33,7 +33,6 @@ class Member {
             'insert into `members`(id , name , roomName) values (?,?,?)',
             [this.id, this.name, this.room.name]
         );
-
     }
 
     exists = async () => {

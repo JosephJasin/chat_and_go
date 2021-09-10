@@ -2,7 +2,6 @@ create table `rooms`
 (
     name         varchar(36) primary key,
     password     varchar(16)                        not null,
-    size         int      default 0                 not null,
     creationDate datetime default CURRENT_TIMESTAMP not null
 );
 

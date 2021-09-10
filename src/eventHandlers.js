@@ -1,2 +1,77 @@
+const {uniqueNamesGenerator, adjectives, colors, animals} = require('unique-names-generator');
 
-module.exports = {}
+const {member: memberConfig} = require('config');
+
+const Room = require("../models/room.js");
+const Member = require("../models/member.js");
+
+function getRandName() {
+    let randName;
+    do {
+        randName = uniqueNamesGenerator({
+            dictionaries: [adjectives, animals, colors],
+            length: 3,
+            style: 'lowerCase'
+        });
+    } while (randName.length > memberConfig.name.max)
+
+    return randName;
+}
+
+function registerRoomHandler(io, socket) {
+    socket.on('room', async args => {
+        try {
+            const room = new Room(args.roomName, args.roomPassword);
+
+            if (args.createRoom)
+                await room.create();
+
+            const member = new Member(getRandName(), room);
+            await member.create();
+
+            socket.join(room.name);
+            socket.emit('save', {
+                memberId: member.id,
+                memberName: member.name,
+                roomName: member.room.name,
+                roomPassword: member.room.password,
+            });
+
+        } catch (e) {
+            console.log('registerRoomHandler : ' , e)
+            socket.emit('error', e);
+        }
+    })
+}
+
+function registerReconnectHandler(io, socket) {
+
+    socket.on('reconnect', async args => {
+        console.log(args);
+
+        try {
+            const room = new Room(args.roomName, args.roomPassword);
+            const member = new Member(args.memberName, room, args.memberId)
+
+            if (await member.exists())
+                socket.join(room.name);
+            throw Error('')//TODO: Add custom error.
+
+        } catch (e) {
+            console.log('registerReconnectHandler : ' , e)
+            socket.emit('error', e.message);
+        }
+    })
+
+}
+
+function registerMessageHandler(io, socket) {
+
+}
+
+
+module.exports = {
+    registerRoomHandler,
+    registerReconnectHandler,
+    registerMessageHandler
+}

@@ -1,14 +1,16 @@
 const {v4: getRandStr} = require('uuid');
 const {room} = require("config");
 
+
+//TODO: Add custom errors
 class Room {
     /**
      * @param name : string
      * @param password : string
      */
     constructor(name, password) {
-        this.name = name;
-        this.password = password;
+        this.name = name.trim().toLowerCase();
+        this.password = password.trim().toLowerCase();
         this.size = 0;
     }
 
@@ -26,9 +28,12 @@ class Room {
         this.validateName();
         this.validatePassword();
 
+        if (await this.exists())
+            throw Error('');
+
         await pool.execute(
             'insert into `rooms` (name, password) value (?,?)',
-            [this.name, this.passord]
+            [this.name, this.password]
         );
     }
 
