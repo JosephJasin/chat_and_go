@@ -2,6 +2,9 @@ const socket = io();
 
 const roomName = document.getElementById('roomName');
 const password = document.getElementById('password');
+const form = document.getElementById('form');
+const messages = document.getElementById('messages');
+const input = document.getElementById('input');
 
 const p = document.getElementById('p');
 p.innerHTML = localStorage.getItem('roomName');
@@ -19,6 +22,15 @@ socket.on('error', error => {
     console.log(error);
 })
 
+socket.on('message', (message) => {
+    console.log("message : ", message.content);
+
+    const item = document.createElement('li');
+    item.textContent = message.content;
+    messages.appendChild(item);
+    window.scrollTo(0, document.body.scrollHeight)
+});
+
 function room(createRoom = true) {
     socket.emit('room', {
         createRoom,
@@ -27,42 +39,31 @@ function room(createRoom = true) {
     });
 }
 
-if (localStorage.getItem('memberID'))
+console.log(localStorage.getItem('memberId'))
+
+if (localStorage.getItem('memberId'))
     socket.emit('reconnect', {
-        memberId: localStorage.getItem('memberID'),
+        memberId: localStorage.getItem('memberId'),
         memberName: localStorage.getItem('memberName'),
         roomName: localStorage.getItem('roomName'),
         roomPassword: localStorage.getItem('roomPassword'),
     });
 
-// socket.on('msg', (message) => {
-//     console.log("msg : " , message.content);
-//
-//     const messages = document.getElementById('messages');
-//     const item = document.createElement('li');
-//     item.textContent = message.content;
-//     messages.appendChild(item);
-//     window.scrollTo(0, document.body.scrollHeight)
-// });
 
+form.addEventListener('submit', sendMessage);
 
-// const form = document.getElementById('form');
-// form.addEventListener('submit', sendMessage);
-//
-// function sendMessage(event) {
-//     const input = document.getElementById('input');
-//
-//     if (input.value) {
-//         socket.emit('msg', {
-//             ID: localStorage.getItem('ID'),
-//             roomID: localStorage.getItem('roomID'),
-//             password: localStorage.getItem('password'),
-//             content: input.value
-//         });
-//         input.value = '';
-//
-//     }
-//
-//     event.preventDefault();
-// }
-//
+function sendMessage(event) {
+    if (input.value) {
+        socket.emit('message', {
+            roomName: localStorage.getItem('roomName'),
+            roomPassword: localStorage.getItem('roomPassword'),
+            memberId: localStorage.getItem('memberId'),
+            memberName: localStorage.getItem('memberName'),
+            content: input.value
+        });
+        input.value = '';
+
+    }
+    event.preventDefault();
+}
+

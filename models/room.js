@@ -11,7 +11,6 @@ class Room {
     constructor(name, password) {
         this.name = name.trim().toLowerCase();
         this.password = password.trim().toLowerCase();
-        this.size = 0;
     }
 
     validateName = () => {

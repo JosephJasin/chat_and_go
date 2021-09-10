@@ -4,6 +4,7 @@ const {member: memberConfig} = require('config');
 
 const Room = require("../models/room.js");
 const Member = require("../models/member.js");
+const Message = require('../models/message.js');
 
 function getRandName() {
     let randName;
@@ -38,7 +39,7 @@ function registerRoomHandler(io, socket) {
             });
 
         } catch (e) {
-            console.log('registerRoomHandler : ' , e)
+            console.log('registerRoomHandler : ', e)
             socket.emit('error', e);
         }
     })
@@ -47,26 +48,41 @@ function registerRoomHandler(io, socket) {
 function registerReconnectHandler(io, socket) {
 
     socket.on('reconnect', async args => {
-        console.log(args);
-
         try {
             const room = new Room(args.roomName, args.roomPassword);
             const member = new Member(args.memberName, room, args.memberId)
-
             if (await member.exists())
-                socket.join(room.name);
-            throw Error('')//TODO: Add custom error.
+                socket.join(member.room.name);
+            else
+                throw Error('')//TODO: Add custom error.
 
         } catch (e) {
-            console.log('registerReconnectHandler : ' , e)
-            socket.emit('error', e.message);
+            console.log('registerReconnectHandler : ', e)
+            socket.emit('error', e);
         }
     })
 
 }
 
 function registerMessageHandler(io, socket) {
+    socket.on('message', async args => {
+        try {
+            const room = new Room(args.roomName, args.roomPassword);
+            const member = new Member(args.memberName, room, args.memberId);
+            const message = new Message(args.content, member);
 
+            await message.create();
+
+            io.to(room.name).emit('message', {
+                memberName: message.member.name,
+                content: message.content,
+            });
+
+        } catch (e) {
+            console.log(e);
+            socket.emit('error', e.message);
+        }
+    })
 }
 
 
