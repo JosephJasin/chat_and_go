@@ -81,3 +81,14 @@ function sendMessage(event) {
     event.preventDefault();
 }
 
+function toggleDarkMode() {
+    const root = document.documentElement;
+    const style = getComputedStyle(root);
+    const primary = style.getPropertyValue('--primary-color')
+    const accent = style.getPropertyValue('--accent-color')
+
+    console.log(primary , accent)
+
+    root.style.setProperty('--primary-color', accent);
+    root.style.setProperty('--accent-color', primary);
+}

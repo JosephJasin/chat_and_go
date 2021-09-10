@@ -1,41 +1,98 @@
+:root {
+    --primary-color: #292929;
+    --accent-color: white;
+
+    --background-color: white;
+}
+
+* {
+    transition: background-color 0.5s;
+}
+
 body {
     margin: 0;
     box-sizing: border-box;
+    height: 100vh;
+    font-family: 'Rubik', sans-serif;
+    color: var(--primary-color);
+    background-color: var(--accent-color);
+
 }
 
-#messages {
+/*****  Navigation bar *****/
+.navbar > ul {
+    display: flex;
+    justify-content: space-between;
     list-style-type: none;
+
     margin: 0;
-    margin-bottom: 100px;
     padding: 0;
 }
 
-#messages > li {
-    padding: 0.5rem 1rem;
+.navbar > ul > li {
+    padding: 20px;
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
-#messages > li:nth-child(odd) {
-    background: #efefef;
+.navbar >ul > li > i{
+    cursor: pointer;
+
 }
 
+.home {
+    margin-top: 10rem;
+}
 
-#form {
-    background: rgba(0, 0, 0, 0.15);
-    padding: 0.25rem;
+.home > h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 5vh 2.5rem;
+}
+
+.home > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.home > div > button {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    border: none;
+    font-weight: bold;
+    border-radius: 50px;
+    flex-basis: 20rem;
+    font-size: 2rem;
+    padding: 1.1rem 0;
+    margin: 3vh 3vw;
+}
+
+footer {
     position: fixed;
     bottom: 0;
-    left: 0;
     right: 0;
-    display: flex;
-    height: 3rem;
-    box-sizing: border-box;
-    backdrop-filter: blur(10px);
+    font-size: 2rem;
+    padding: 20px;
 }
 
-#input {
-    border: none;
-    padding: 0 1rem;
-    flex-grow: 1;
-    border-radius: 2rem;
-    margin: 0.25rem;
+footer > a:first-child{
+    margin-right: 10px;
 }
+
+a{
+    color: var(--primary-color);
+}
+
+
+@media (max-width: 700px) {
+    .home {
+        margin-top: 5rem;
+    }
+
+    .home > h1, .home > div > button {
+        font-size: 1.5rem;
+    }
+}
+
+
