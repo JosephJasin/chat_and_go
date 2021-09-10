@@ -27,8 +27,22 @@ class Message {
             'insert into `messages` (content , memberId) values(?,?)',
             [this.content, this.member.id]
         );
-
     }
+
+    static  getAll = async (member) => {
+        if (!await member.exists()) throw Error('');
+
+        const [rows] = await pool.execute(
+            'select messages.content , members.name from messages inner join members ' +
+            'on messages.memberId =members.id ' +
+            'where members.roomName = ? order by messages.creationDate  limit 1000',
+            [member.room.name]
+        );
+
+        return rows;
+    }
+
+
 }
 
 module.exports = Message;

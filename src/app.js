@@ -4,12 +4,7 @@ const express = require('express');
 const {Server: SocketIoServer} = require('socket.io');
 
 const {port} = require('config');
-
 const handlers = require('./eventHandlers.js');
-
-const Room = require('../models/room.js');
-const Member = require('../models/member.js');
-const Message = require('../models/message.js');
 
 const app = express();
 
@@ -40,7 +35,6 @@ io.on('connection', socket => {
     handlers.registerRoomHandler(io, socket)
     handlers.registerReconnectHandler(io, socket);
     handlers.registerMessageHandler(io, socket);
-
 });
 
 server.listen(port);

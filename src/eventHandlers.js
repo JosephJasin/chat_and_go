@@ -46,7 +46,6 @@ function registerRoomHandler(io, socket) {
 }
 
 function registerReconnectHandler(io, socket) {
-
     socket.on('reconnect', async args => {
         try {
             const room = new Room(args.roomName, args.roomPassword);
@@ -55,6 +54,12 @@ function registerReconnectHandler(io, socket) {
                 socket.join(member.room.name);
             else
                 throw Error('')//TODO: Add custom error.
+
+
+            const messages = await Message.getAll(member);
+
+            socket.emit('messages' , messages);
+
 
         } catch (e) {
             console.log('registerReconnectHandler : ', e)
@@ -84,7 +89,6 @@ function registerMessageHandler(io, socket) {
         }
     })
 }
-
 
 module.exports = {
     registerRoomHandler,

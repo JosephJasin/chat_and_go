@@ -10,8 +10,6 @@ const p = document.getElementById('p');
 p.innerHTML = localStorage.getItem('roomName');
 
 socket.on('save', data => {
-    console.log('data : ', data);
-
     for (const key in data)
         localStorage.setItem(key, data[key]);
 
@@ -31,6 +29,24 @@ socket.on('message', (message) => {
     window.scrollTo(0, document.body.scrollHeight)
 });
 
+socket.on('messages', msgs => {
+
+    msgs.forEach(message => {
+        const item = document.createElement('li');
+        item.textContent = message.content;
+        messages.appendChild(item);
+    });
+
+    window.scrollTo(0, document.body.scrollHeight)
+});
+
+socket.emit('test', {
+    memberId: localStorage.getItem('memberId'),
+    memberName: localStorage.getItem('memberName'),
+    roomName: localStorage.getItem('roomName'),
+    roomPassword: localStorage.getItem('roomPassword'),
+});
+
 function room(createRoom = true) {
     socket.emit('room', {
         createRoom,
@@ -38,8 +54,6 @@ function room(createRoom = true) {
         roomPassword: password.value.trim()
     });
 }
-
-console.log(localStorage.getItem('memberId'))
 
 if (localStorage.getItem('memberId'))
     socket.emit('reconnect', {
