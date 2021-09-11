@@ -1,88 +1,7 @@
-// const socket = io();
-//
-// const roomName = document.getElementById('roomName');
-// const password = document.getElementById('password');
-// const form = document.getElementById('form');
-// const messages = document.getElementById('messages');
-// const input = document.getElementById('input');
-//
-// const p = document.getElementById('p');
-// p.innerHTML = localStorage.getItem('roomName');
-//
-// socket.on('save', data => {
-//     for (const key in data)
-//         localStorage.setItem(key, data[key]);
-//
-//     p.innerHTML = localStorage.getItem('roomName');
-// });
-//
-// socket.on('error', error => {
-//     console.log(error);
-// })
-//
-// socket.on('message', (message) => {
-//     console.log("message : ", message.content);
-//
-//     const item = document.createElement('li');
-//     item.textContent = message.content;
-//     messages.appendChild(item);
-//     window.scrollTo(0, document.body.scrollHeight)
-// });
-//
-// socket.on('messages', msgs => {
-//
-//     msgs.forEach(message => {
-//         const item = document.createElement('li');
-//         item.textContent = message.content;
-//         messages.appendChild(item);
-//     });
-//
-//     window.scrollTo(0, document.body.scrollHeight)
-// });
-//
-// socket.emit('test', {
-//     memberId: localStorage.getItem('memberId'),
-//     memberName: localStorage.getItem('memberName'),
-//     roomName: localStorage.getItem('roomName'),
-//     roomPassword: localStorage.getItem('roomPassword'),
-// });
-//
-// function room(createRoom = true) {
-//     socket.emit('room', {
-//         createRoom,
-//         roomName: roomName.value.trim(),
-//         roomPassword: password.value.trim()
-//     });
-// }
-//
-// if (localStorage.getItem('memberId'))
-//     socket.emit('reconnect', {
-//         memberId: localStorage.getItem('memberId'),
-//         memberName: localStorage.getItem('memberName'),
-//         roomName: localStorage.getItem('roomName'),
-//         roomPassword: localStorage.getItem('roomPassword'),
-//     });
-//
-//
-// form.addEventListener('submit', sendMessage);
-//
-// function sendMessage(event) {
-//     if (input.value) {
-//         socket.emit('message', {
-//             roomName: localStorage.getItem('roomName'),
-//             roomPassword: localStorage.getItem('roomPassword'),
-//             memberId: localStorage.getItem('memberId'),
-//             memberName: localStorage.getItem('memberName'),
-//             content: input.value
-//         });
-//         input.value = '';
-//
-//     }
-//     event.preventDefault();
-// }
-
 import HomeView from "./views/home.js";
 import CreateRoomView from "./views/createRoom.js";
+
+import './socket_io.js';
 
 const app = document.getElementById('app');
 
@@ -105,6 +24,7 @@ function router() {
 
     setTimeout(()=>{
         app.innerHTML = view.getHtml();
+        view.init();
         app.style.setProperty('opacity', '1');
     } , 300)
 }
@@ -119,10 +39,17 @@ function toggleDarkMode() {
     const primary = style.getPropertyValue('--primary-color')
     const accent = style.getPropertyValue('--accent-color')
 
+    const primaryBrighter = style.getPropertyValue('--primary-color-brighter')
+    const accentBrighter = style.getPropertyValue('--accent-color-brighter')
+
+
     console.log(primary, accent)
 
     root.style.setProperty('--primary-color', accent);
     root.style.setProperty('--accent-color', primary);
+
+    root.style.setProperty('--primary-color-brighter', accentBrighter);
+    root.style.setProperty('--accent-color-brighter', primaryBrighter);
 }
 
 window.toggleDarkMode = toggleDarkMode;
