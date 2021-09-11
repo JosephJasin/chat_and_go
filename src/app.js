@@ -27,8 +27,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static('public'));
 
-app.get('/', async (req, res) => {
-    res.sendFile(rootDir + '/views/home.html');
+app.get('/*' , (req, res) => {
+    res.sendFile(rootDir + '/public/index.html');
 })
 
 io.on('connection', socket => {

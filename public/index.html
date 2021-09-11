@@ -16,22 +16,12 @@
 </head>
 <body>
 
-<header class="navbar">
-    <ul>
-        <li>Chat And Go</li>
-        <li><i class='far fa-moon' onclick="toggleDarkMode()"></i></li>
-    </ul>
+<header>
+    Chat And Go
+    <i class='far fa-moon' onclick="toggleDarkMode()"></i>
 </header>
 
-<section class="home">
-    <h1>Create a private room for discussion without showing your name</h1>
-    <div>
-        <button>Create room</button>
-        <button onclick="">Join room
-        </button>
-    </div>
-
-</section>
+<section id="app" class="home"></section>
 
 <div class="spacer"></div>
 
@@ -41,7 +31,6 @@
 </footer>
 
 
-<script src="code.js"></script>
-
+<script type="module" src="index.js"></script>
 </body>
 </html>

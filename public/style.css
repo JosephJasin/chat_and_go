@@ -4,7 +4,7 @@
 }
 
 * {
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, opacity 0.5s;
 }
 
 html {
@@ -31,29 +31,25 @@ a {
 .spacer {
 }
 
-
-/*****  Navigation bar *****/
-.navbar > ul {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-
-    margin: 0;
-    padding: 0;
+#app {
+    align-self: center;
 }
 
-.navbar > ul > li {
+header {
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
     font-size: 1.6rem;
     font-weight: bold;
 }
 
-.navbar > ul > li > i {
+header > i {
     cursor: pointer;
-}
 
+}
 /*****  Home body  *****/
 .home > h1 {
+    opacity: 1;
     text-align: center;
     font-size: 2.5rem;
     margin: 0 calc(35vw - 150px) 5vh;
@@ -102,4 +98,17 @@ footer > a:first-child {
     }
 }
 
+input {
+    display: block;
+    margin-bottom: 1.5em;
+    padding: 0.3em;
+
+    font-size: 1.5em;
+
+    color: rgb(51, 51, 51);
+
+    border: 1px solid #ccc;
+
+    border-radius: 50px;
+}
 
