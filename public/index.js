@@ -86,9 +86,12 @@ import CreateRoomView from "./views/createRoom.js";
 
 const app = document.getElementById('app');
 
-function router(url) {
+function navigateTo(url) {
     history.pushState(null, null, url);
+    router();
+}
 
+function router() {
     let view;
     switch (location.pathname.toLowerCase()) {
         case '/createroom' :
@@ -106,9 +109,9 @@ function router(url) {
     } , 300)
 }
 
-window.addEventListener('popstate', () => router(location.href));
-document.addEventListener("DOMContentLoaded", () => router(location.href));
-window.router = router;
+window.addEventListener('popstate',  router);
+document.addEventListener("DOMContentLoaded",  router);
+window.navigateTo = navigateTo;
 
 function toggleDarkMode() {
     const root = document.documentElement;
