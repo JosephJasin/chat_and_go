@@ -14,8 +14,8 @@ class Room {
     }
 
     validateName = () => {
-        if (this.name.length < room.password.min) throw Error('');
-        if (this.name.length > room.password.max) throw Error('');
+        if (this.name.length < room.name.min) throw Error('');
+        if (this.name.length > room.name.max) throw Error('');
     }
 
     validatePassword = () => {
