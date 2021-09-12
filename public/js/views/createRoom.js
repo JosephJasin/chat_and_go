@@ -1,11 +1,15 @@
+import {room} from "../socket_io.js";
+import navigateTo from "../navigator.js";
+
 export default class CreateRoomView {
-    constructor() {
-        document.title = 'Create Room'
+    constructor(createRoom = true) {
+        document.title = createRoom? 'Create Room' : 'Join Room';
+        this.createRoom = createRoom;
     }
 
     getHtml = () => `
         <div class="create-room">
-            <h1>Create room</h1>
+            <h1>${this.createRoom ? "Create room" : "Join room"}</h1>
             <form id="createRoomForm">
             <input id="roomName" placeholder="Room name" minlength="1" maxlength="36" required/> 
             <input id="roomPassword" placeholder="Room password" minlength="4" maxlength="16" required/>
@@ -14,15 +18,12 @@ export default class CreateRoomView {
         </div>
     `;
 
-    init = () =>{
+    init = () => {
         const createRoomForm = document.getElementById('createRoomForm');
-        createRoomForm.addEventListener('submit' , ev => {
+        createRoomForm.addEventListener('submit',  ev => {
             ev.preventDefault();
-            room();
+            room(this.createRoom);
         });
-
-
     }
-
 }
 

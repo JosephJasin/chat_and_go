@@ -44,7 +44,7 @@ socket.on('error', error => {
 //     roomPassword: localStorage.getItem('roomPassword'),
 // });
 
-function room(createRoom = true) {
+export function room(createRoom = true) {
     const roomName = document.getElementById('roomName');
     const password = document.getElementById('roomPassword');
 
@@ -82,4 +82,3 @@ if (localStorage.getItem('memberId'))
 // }
 
 
-window.room = room;
