@@ -21,7 +21,7 @@
             toggleDarkMode(false);
 
         function toggleDarkMode(flip = true) {
-            if (flip){
+            if (flip) {
                 console.log('FLIPED');
                 dark = !dark;
                 localStorage.setItem('dark', dark ? '1' : '0');
@@ -58,6 +58,8 @@
     <a href="https://github.com/JosephJasin" target="_blank"><i class="fab fa-github"></i></a>
     <a href="https://www.linkedin.com/in/joseph-jasin/" target="_blank"><i class="fab fa-linkedin"></i></a>
 </footer>
+
+<div id="snackbar">This room name is already used</div>
 
 <!--TODO: In production change this line-->
 <script src="socket.io/socket.io.js"></script>

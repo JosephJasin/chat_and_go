@@ -39,8 +39,7 @@ function registerRoomHandler(io, socket) {
             });
 
         } catch (e) {
-            console.log('registerRoomHandler : ', e)
-            socket.emit('error', e);
+            socket.emit('error', e.message);
         }
     })
 }
@@ -62,8 +61,8 @@ function registerReconnectHandler(io, socket) {
 
 
         } catch (e) {
-            console.log('registerReconnectHandler : ', e)
-            socket.emit('error', e);
+            socket.emit('error', e.message);
+
         }
     })
 
@@ -84,7 +83,6 @@ function registerMessageHandler(io, socket) {
             });
 
         } catch (e) {
-            console.log(e);
             socket.emit('error', e.message);
         }
     })

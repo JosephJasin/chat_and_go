@@ -1,6 +1,5 @@
-const {message} = require("config");
+const {message, room} = require("config");
 
-//TODO: Add custom errors
 class Message {
     /**
      * @param content : string
@@ -12,15 +11,19 @@ class Message {
     }
 
     validateContent = () => {
-        if (this.content.length < message.min) throw  Error('');
-        if (this.content.length > message.max) throw  Error('');
+        if (this.content.length < message.min)
+            throw Error(`Minimum message length is ${message.min}`);
+
+        if (this.content.length > message.max)
+            throw Error(`Minimum message length is ${message.max}`);
+
     }
 
     create = async () => {
         this.validateContent();
 
         if (!await this.member.exists()) {
-            throw Error('');
+            throw Error('You are not a member in this room');
         }
 
         await pool.execute(
@@ -30,7 +33,8 @@ class Message {
     }
 
     static  getAll = async (member) => {
-        if (!await member.exists()) throw Error('');
+        if (!await member.exists())
+            throw Error('You are not a member in this room');
 
         const [rows] = await pool.execute(
             'select messages.content , members.name from messages inner join members ' +

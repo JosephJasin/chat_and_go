@@ -3,7 +3,7 @@ import navigateTo from "../navigator.js";
 
 export default class CreateRoomView {
     constructor(createRoom = true) {
-        document.title = createRoom? 'Create Room' : 'Join Room';
+        document.title = createRoom ? 'Create Room' : 'Join Room';
         this.createRoom = createRoom;
     }
 
@@ -20,7 +20,10 @@ export default class CreateRoomView {
 
     init = () => {
         const createRoomForm = document.getElementById('createRoomForm');
-        createRoomForm.addEventListener('submit',  ev => {
+
+        const roomName = document.getElementById('roomName');
+
+        createRoomForm.addEventListener('submit', ev => {
             ev.preventDefault();
             room(this.createRoom);
         });

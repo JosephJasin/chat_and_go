@@ -2,7 +2,6 @@ const {v4: getRandStr} = require('uuid');
 const {room} = require("config");
 
 
-//TODO: Add custom errors
 class Room {
     /**
      * @param name : string
@@ -14,13 +13,19 @@ class Room {
     }
 
     validateName = () => {
-        if (this.name.length < room.name.min) throw Error('');
-        if (this.name.length > room.name.max) throw Error('');
+        if (this.name.length < room.name.min)
+            throw Error(`Minimum room name length is ${room.name.min}`);
+
+        if (this.name.length > room.name.max)
+            throw Error(`Maximum room name length is ${room.name.max}`);
     }
 
     validatePassword = () => {
-        if (this.password.length < room.password.min) throw Error('');
-        if (this.password.length > room.password.max) throw Error('');
+        if (this.password.length < room.password.min)
+            throw Error(`Minimum password length is ${room.password.min}`);
+
+        if (this.password.length > room.password.max)
+            throw Error(`Minimum password length is ${room.password.min}`);
     }
 
     create = async () => {
@@ -28,7 +33,7 @@ class Room {
         this.validatePassword();
 
         if (await this.exists())
-            throw Error('');
+            throw Error('This room name is already used');
 
         await pool.execute(
             'insert into `rooms` (name, password) value (?,?)',

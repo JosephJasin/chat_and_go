@@ -16,6 +16,7 @@ html {
 }
 
 body {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -144,6 +145,23 @@ input::placeholder {
     font-size: 1.3rem;
 }
 
+
+
+#snackbar {
+    align-self: center;
+    position: fixed;
+    bottom: 0;
+    color: var(--accent-color);
+    background-color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 1;
+    font-size: 1.3rem;
+    opacity: 0;
+    transition: opacity 0.5s , transform 0.5s;
+}
+
+
 @media (max-width: 700px) ,(max-height: 700px) {
     .home > h1 {
         font-size: 1.5rem;
@@ -159,5 +177,8 @@ input::placeholder {
         width: 80%;
     }
 
+    #snackbar{
+        font-size: 1.1rem;
+    }
 
 }

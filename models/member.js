@@ -1,7 +1,6 @@
 const {v4: getRandStr} = require("uuid");
-const {member} = require("config");
+const {member, room} = require("config");
 
-//TODO: Add custom errors
 class Member {
     /**
      * @param name : string
@@ -16,15 +15,18 @@ class Member {
     }
 
     validateName = () => {
-        if (this.name.length < member.name.min) throw Error('');
-        if (this.name.length > member.name.max) throw Error('');
+        if (this.name.length < member.name.min)
+            throw Error(`Minimum member name length is ${member.min}`);
+
+        if (this.name.length > member.name.max)
+            throw Error(`Maximum member name length is ${member.max}`);
     }
 
     create = async () => {
         this.validateName();
 
         if (!await this.room.exists()) {
-            throw Error('');
+            throw Error('Wrong room name or password');
         }
 
         this.id = getRandStr();

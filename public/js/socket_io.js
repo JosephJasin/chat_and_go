@@ -14,7 +14,18 @@ socket.on('save', data => {
 });
 
 socket.on('error', error => {
-    console.log(error);
+    const snackbar = document.getElementById('snackbar');
+
+    snackbar.textContent = error;
+
+    snackbar.style.setProperty('opacity', '1');
+    snackbar.style.setProperty('transform', 'translateY(-50px)')
+
+    setTimeout(()=>{
+        snackbar.style.setProperty('opacity', '0');
+        snackbar.style.setProperty('transform', 'translateY(50px)');
+
+    } , 4000);
 })
 
 // socket.on('message', (message) => {
