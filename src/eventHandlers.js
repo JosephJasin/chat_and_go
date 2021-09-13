@@ -52,13 +52,18 @@ function registerReconnectHandler(io, socket) {
             if (await member.exists())
                 socket.join(member.room.name);
             else
-                throw Error('')//TODO: Add custom error.
+                throw Error('You are not a member in this room');
 
+            // const messages = await Message.getAll(member);
+            // socket.emit('messages', messages);
 
-            const messages = await Message.getAll(member);
-
-            socket.emit('messages' , messages);
-
+            if (args.manual)
+                socket.emit('save', {
+                    memberId: member.id,
+                    memberName: member.name,
+                    roomName: member.room.name,
+                    roomPassword: member.room.password,
+                });
 
         } catch (e) {
             socket.emit('error', e.message);

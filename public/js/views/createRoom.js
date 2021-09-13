@@ -1,5 +1,4 @@
 import {room} from "../socket_io.js";
-import navigateTo from "../navigator.js";
 
 export default class CreateRoomView {
     constructor(createRoom = true) {
@@ -20,8 +19,6 @@ export default class CreateRoomView {
 
     init = () => {
         const createRoomForm = document.getElementById('createRoomForm');
-
-        const roomName = document.getElementById('roomName');
 
         createRoomForm.addEventListener('submit', ev => {
             ev.preventDefault();

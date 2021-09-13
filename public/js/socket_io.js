@@ -24,8 +24,6 @@ socket.on('error', error => {
     }, 4000);
 })
 
-
-
 // socket.on('messages', msgs => {
 //
 //     msgs.forEach(message => {
@@ -37,32 +35,38 @@ socket.on('error', error => {
 //     window.scrollTo(0, document.body.scrollHeight)
 // });
 
-// socket.emit('test', {
-//     memberId: localStorage.getItem('memberId'),
-//     memberName: localStorage.getItem('memberName'),
-//     roomName: localStorage.getItem('roomName'),
-//     roomPassword: localStorage.getItem('roomPassword'),
-// });
-
 export function room(createRoom = true) {
-    const roomName = document.getElementById('roomName');
-    const password = document.getElementById('roomPassword');
+    const roomName = document.getElementById('roomName').value.trim();
+    const password = document.getElementById('roomPassword').value.trim();
 
-    socket.emit('room', {
-        createRoom,
-        roomName: roomName.value.trim(),
-        roomPassword: password.value.trim()
-    });
+    if (!createRoom && localStorage.getItem('roomName') === roomName
+        && localStorage.getItem('roomPassword') === password) {
+
+        reconnect(true);
+
+    } else {
+        socket.emit('room', {
+            createRoom,
+            roomName: roomName,
+            roomPassword: password
+        });
+    }
+
+
 }
 
 if (localStorage.getItem('memberId'))
+    reconnect();
+
+export function reconnect(manual = false) {
     socket.emit('reconnect', {
+        manual,
         memberId: localStorage.getItem('memberId'),
         memberName: localStorage.getItem('memberName'),
         roomName: localStorage.getItem('roomName'),
-        roomPassword: localStorage.getItem('roomPassword'),
+        roomPassword: localStorage.getItem('roomPassword')
     });
-
+}
 
 export function sendMessage(content) {
     content = content.trim();
