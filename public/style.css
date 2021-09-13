@@ -1,14 +1,16 @@
+/*****  Common  *****/
+* {
+    font-family: 'Rubik', sans-serif;
+    transition: background-color 0.5s, opacity 0.5s;
+    box-sizing: border-box;
+}
+
 :root {
     --primary-color: #1C1C1C;
     --accent-color: #F7F7F7;
 
     --primary-color-brighter: #333333;
     --accent-color-brighter: #FFFFFF;
-
-}
-
-* {
-    transition: background-color 0.5s, opacity 0.5s;
 }
 
 html {
@@ -16,37 +18,20 @@ html {
 }
 
 body {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
     margin: 0;
-    box-sizing: border-box;
-    font-family: 'Rubik', sans-serif;
     color: var(--primary-color);
     background-color: var(--accent-color);
+}
 
+section{
+    flex-grow: 1;
 }
 
 a {
     color: var(--primary-color);
-}
-
-button, input[type=submit] {
-    border: none;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--accent-color);
-}
-
-.spacer {
-}
-
-#app {
-    align-self: center;
 }
 
 header {
@@ -61,91 +46,13 @@ header > i {
     cursor: pointer;
 }
 
-/*****  Home body  *****/
-.home > h1 {
-    opacity: 1;
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 0 calc(35vw - 150px) 5vh;
-}
-
-.home > div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.home button {
-    flex-basis: 20rem;
-    font-size: 2rem;
-    padding: 1.1rem 0;
-    margin: 3vh 3vw;
-}
-
-/*****  Home footer  *****/
-footer {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 2rem;
-    padding: 20px;
-}
-
-footer > a:first-child {
-    margin-right: 10px;
-}
-
-
-.create-room {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.create-room form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.create-room input[type=submit] {
-    font-size: 2rem;
-    width: 70%;
-    padding: 1.1rem 2rem;
-    margin: 3vh 3vw;
-}
-
-.create-room h1 {
-    text-align: center;
-    margin-bottom: 3vh;
-    font-size: 2.5rem;
-}
-
-input {
-    display: block;
-    margin: 1rem;
-    padding: 0.5em;
-
-    font-size: 1.5em;
-
-    color: var(--primary-color);
-    background-color: var(--accent-color-brighter);
-
-    box-shadow: 0px 10px 25px 5px #0000000f;
-
-    border-radius: 50px;
-    border: none;
-}
-
 input:focus {
     outline: none;
 }
 
-
 input::placeholder {
     font-size: 1.3rem;
 }
-
-
 
 #snackbar {
     align-self: center;
@@ -161,16 +68,121 @@ input::placeholder {
     transition: opacity 0.5s , transform 0.5s;
 }
 
+footer {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 2rem;
+    padding: 20px;
+}
 
+footer > a:first-child {
+    margin-right: 10px;
+}
+
+.wide-button {
+    border: none;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+
+    font-size: 2rem;
+    padding: 1.1rem 0;
+}
+
+/*****  Home  *****/
+.home{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 150px;
+    gap: 5vh;
+}
+
+.home > h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0 calc(35vw - 150px) 5vh;
+}
+
+.home > div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4vw;
+}
+
+.home > div > .wide-button {
+    flex-basis: 18rem;
+}
+
+/*****  Create Room  *****/
+.create-room {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 150px;
+}
+
+.create-room h1 {
+    text-align: center;
+    margin-bottom: 3vh;
+    font-size: 2.5rem;
+}
+
+.create-room form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-room .wide-button {
+    width: 70%;
+    margin-top: 2vh;
+}
+
+.create-room input {
+    display: block;
+    margin: 1rem;
+    padding: 0.5em;
+
+    font-size: 1.5em;
+
+    color: var(--primary-color);
+    background-color: var(--accent-color-brighter);
+
+    box-shadow: 0px 10px 25px 5px #0000000f;
+
+    border-radius: 50px;
+    border: none;
+}
+
+/*****  Responsive  *****/
 @media (max-width: 700px) ,(max-height: 700px) {
-    .home > h1 {
+    .home{
+        padding: 50px 0 0 0;
         font-size: 1.5rem;
-        margin: 10vh 5vw;
     }
 
-    .home button {
+    .home > h1 {
         font-size: 1.5rem;
-        margin: 2vh 4vw;
+        margin: 0 5vw 5vh;
+    }
+
+    .wide-button {
+        font-size: 1.4rem;
     }
 
     .create-room input {
@@ -180,5 +192,4 @@ input::placeholder {
     #snackbar{
         font-size: 1.1rem;
     }
-
 }

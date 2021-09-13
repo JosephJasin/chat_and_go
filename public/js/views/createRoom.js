@@ -13,7 +13,7 @@ export default class CreateRoomView {
             <form id="createRoomForm">
             <input id="roomName" placeholder="Room name" minlength="1" maxlength="36" required/> 
             <input id="roomPassword" placeholder="Room password" minlength="4" maxlength="16" required/>
-            <input type="submit" value="Create" />
+            <button class="wide-button">Create</button>
             </form>
         </div>
     `;

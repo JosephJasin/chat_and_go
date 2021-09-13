@@ -1,3 +1,5 @@
+import navigateTo from "./navigator.js";
+
 const socket = io();
 
 
@@ -11,6 +13,8 @@ const socket = io();
 socket.on('save', data => {
     for (const key in data)
         localStorage.setItem(key, data[key]);
+
+    navigateTo('/chat');
 });
 
 socket.on('error', error => {

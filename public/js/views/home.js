@@ -10,8 +10,8 @@ export default class HomeView {
      <div class="home">
         <h1>Create a private room for discussion without showing your name</h1>
         <div>
-        <button id="createRoomButton">Create room</button>
-        <button id="joinRoomButton">Join room</button>
+        <button id="createRoomButton" class="wide-button">Create room</button>
+        <button id="joinRoomButton" class="wide-button">Join room</button>
         </div> 
     </div>
      `;

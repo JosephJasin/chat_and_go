@@ -4,7 +4,20 @@ export default class ChatView {
         document.title = 'Chat';
     }
 
-    getHtml = () => ``;
+    getHtml = () => `<div style="
+    background-color: red;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    height: 100%;
+">
+
+    <input>
+
+
+</div>
+    
+    
+    `;
 
 
     init = () => {
