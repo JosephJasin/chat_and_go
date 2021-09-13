@@ -1,14 +1,6 @@
 import navigateTo from "./navigator.js";
 
-const socket = io();
-
-
-// const form = document.getElementById('form');
-// const messages = document.getElementById('messages');
-// const input = document.getElementById('input');
-
-// const p = document.getElementById('p');
-
+export const socket = io();
 
 socket.on('save', data => {
     for (const key in data)
@@ -25,21 +17,14 @@ socket.on('error', error => {
     snackbar.style.setProperty('opacity', '1');
     snackbar.style.setProperty('transform', 'translateY(-50px)')
 
-    setTimeout(()=>{
+    setTimeout(() => {
         snackbar.style.setProperty('opacity', '0');
         snackbar.style.setProperty('transform', 'translateY(50px)');
 
-    } , 4000);
+    }, 4000);
 })
 
-// socket.on('message', (message) => {
-//     console.log("message : ", message.content);
-//
-//     const item = document.createElement('li');
-//     item.textContent = message.content;
-//     messages.appendChild(item);
-//     window.scrollTo(0, document.body.scrollHeight)
-// });
+
 
 // socket.on('messages', msgs => {
 //
@@ -79,21 +64,19 @@ if (localStorage.getItem('memberId'))
     });
 
 
-// form.addEventListener('submit', sendMessage);
-//
-// function sendMessage(event) {
-//     if (input.value) {
-//         socket.emit('message', {
-//             roomName: localStorage.getItem('roomName'),
-//             roomPassword: localStorage.getItem('roomPassword'),
-//             memberId: localStorage.getItem('memberId'),
-//             memberName: localStorage.getItem('memberName'),
-//             content: input.value
-//         });
-//         input.value = '';
-//
-//     }
-//     event.preventDefault();
-// }
+export function sendMessage(content) {
+    content = content.trim();
+
+    if (content.length === 0)
+        return;
+
+    socket.emit('message', {
+        roomName: localStorage.getItem('roomName'),
+        roomPassword: localStorage.getItem('roomPassword'),
+        memberId: localStorage.getItem('memberId'),
+        memberName: localStorage.getItem('memberName'),
+        content: content
+    });
+}
 
 

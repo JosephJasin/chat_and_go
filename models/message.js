@@ -15,7 +15,7 @@ class Message {
             throw Error(`Minimum message length is ${message.min}`);
 
         if (this.content.length > message.max)
-            throw Error(`Minimum message length is ${message.max}`);
+            throw Error(`Maximum message length is ${message.max}`);
 
     }
 

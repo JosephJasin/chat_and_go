@@ -26,8 +26,10 @@ body {
     background-color: var(--accent-color);
 }
 
-section{
+section {
     flex-grow: 1;
+    align-self: center;
+    width: 100%;
 }
 
 a {
@@ -42,7 +44,7 @@ header {
     font-weight: bold;
 }
 
-header > i {
+i {
     cursor: pointer;
 }
 
@@ -65,7 +67,7 @@ input::placeholder {
     z-index: 1;
     font-size: 1.3rem;
     opacity: 0;
-    transition: opacity 0.5s , transform 0.5s;
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 footer {
@@ -92,7 +94,7 @@ footer > a:first-child {
 }
 
 /*****  Home  *****/
-.home{
+.home {
     width: 100%;
     height: 100%;
 
@@ -169,9 +171,64 @@ footer > a:first-child {
     border: none;
 }
 
+
+/*****  Chat  *****/
+.chat {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat #messages {
+    overflow-y: auto;
+    width: 50%;
+    flex: 1;
+}
+
+.chat ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+
+.chat li {
+    padding: 10px;
+}
+
+.inner-icon {
+    position: relative;
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat i {
+    position: absolute;
+    bottom: 40px;
+    right: 0;
+    padding: 10px;
+}
+
+.chat input {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 4px 40px 4px 4px;
+    margin-bottom: 40px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0px 10px 25px 5px #0000000f;
+    color: var(--primary-color);
+    background-color: var(--accent-color-brighter);
+}
+
+
 /*****  Responsive  *****/
 @media (max-width: 700px) ,(max-height: 700px) {
-    .home{
+    .home {
         padding: 50px 0 0 0;
         font-size: 1.5rem;
     }
@@ -189,7 +246,11 @@ footer > a:first-child {
         width: 80%;
     }
 
-    #snackbar{
+    #snackbar {
         font-size: 1.1rem;
+    }
+
+    .chat #messages, .inner-icon {
+        width: 95%;
     }
 }
