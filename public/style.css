@@ -48,7 +48,7 @@ i {
     cursor: pointer;
 }
 
-input:focus {
+input:focus , textarea{
     outline: none;
 }
 
@@ -185,6 +185,7 @@ footer > a:first-child {
     overflow-y: auto;
     width: 50%;
     flex: 1;
+    white-space: pre-line;
 }
 
 .chat ul {
@@ -213,7 +214,7 @@ footer > a:first-child {
     padding: 10px;
 }
 
-.chat input {
+.chat input  , .chat textarea{
     width: 100%;
     font-size: 1.3rem;
     padding: 4px 40px 4px 4px;
@@ -225,6 +226,13 @@ footer > a:first-child {
     background-color: var(--accent-color-brighter);
 }
 
+.chat textarea{
+    resize: none;
+}
+
+.chat textarea::-webkit-scrollbar {
+    display: none;
+}
 
 /*****  Responsive  *****/
 @media (max-width: 700px) ,(max-height: 700px) {
