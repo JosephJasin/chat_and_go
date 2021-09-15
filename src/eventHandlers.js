@@ -54,9 +54,6 @@ function registerReconnectHandler(io, socket) {
             else
                 throw Error('You are not a member in this room');
 
-            // const messages = await Message.getAll(member);
-            // socket.emit('messages', messages);
-
             if (args.manual)
                 socket.emit('save', {
                     memberId: member.id,
@@ -70,7 +67,6 @@ function registerReconnectHandler(io, socket) {
 
         }
     })
-
 }
 
 function registerMessageHandler(io, socket) {
@@ -93,8 +89,24 @@ function registerMessageHandler(io, socket) {
     })
 }
 
+function registerMessagesHandler(io, socket) {
+    socket.on('messages', async args => {
+        try {
+            const room = new Room(args.roomName, args.roomPassword);
+            const member = new Member(args.memberName, room, args.memberId);
+            const messages = await Message.get(member, args.lastId);
+
+            socket.emit('messages', messages);
+        } catch (e) {
+            socket.emit('error', e.message);
+        }
+    });
+}
+
+
 module.exports = {
     registerRoomHandler,
     registerReconnectHandler,
-    registerMessageHandler
+    registerMessageHandler,
+    registerMessagesHandler,
 }

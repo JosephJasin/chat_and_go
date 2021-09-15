@@ -24,17 +24,6 @@ socket.on('error', error => {
     }, 4000);
 })
 
-// socket.on('messages', msgs => {
-//
-//     msgs.forEach(message => {
-//         const item = document.createElement('li');
-//         item.textContent = message.content;
-//         messages.appendChild(item);
-//     });
-//
-//     window.scrollTo(0, document.body.scrollHeight)
-// });
-
 export function room(createRoom = true) {
     const roomName = document.getElementById('roomName').value.trim();
     const password = document.getElementById('roomPassword').value.trim();
@@ -51,8 +40,6 @@ export function room(createRoom = true) {
             roomPassword: password
         });
     }
-
-
 }
 
 if (localStorage.getItem('memberId'))
@@ -80,6 +67,16 @@ export function sendMessage(content) {
         memberId: localStorage.getItem('memberId'),
         memberName: localStorage.getItem('memberName'),
         content: content
+    });
+}
+
+export function getMessages(lastId = undefined) {
+    socket.emit('messages', {
+        lastId,
+        roomName: localStorage.getItem('roomName'),
+        roomPassword: localStorage.getItem('roomPassword'),
+        memberId: localStorage.getItem('memberId'),
+        memberName: localStorage.getItem('memberName'),
     });
 }
 

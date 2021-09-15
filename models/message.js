@@ -32,21 +32,40 @@ class Message {
         );
     }
 
-    static  getAll = async (member) => {
+    static  get = async (member, lastId) => {
         if (!await member.exists())
             throw Error('You are not a member in this room');
 
-        const [rows] = await pool.execute(
-            'select messages.content , members.name from messages inner join members ' +
-            'on messages.memberId =members.id ' +
-            'where members.roomName = ? order by messages.creationDate  limit 1000',
-            [member.room.name]
-        );
+        if (Number.isInteger(lastId)) {
+            const [rows] = await pool.execute(
+                `select messages.id, messages.content, members.name
+                 from messages
+                          inner join members
+                                     on messages.memberId = members.id
+                 where members.roomName = ?
+                   and messages.id < ?
+                 order by messages.id desc
+                 limit 20
+                `,
+                [member.room.name, lastId]
+            );
+            return rows;
+        } else {
+            const [rows] = await pool.execute(
+                `select messages.id, messages.content, members.name
+                 from messages
+                          inner join members
+                                     on messages.memberId = members.id
+                 where members.roomName = ?
+                 order by messages.id desc
+                 limit 20
+                `,
+                [member.room.name]
+            );
 
-        return rows;
+            return rows;
+        }
     }
-
-
 }
 
 module.exports = Message;
