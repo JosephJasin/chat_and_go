@@ -11,8 +11,8 @@ export default class CreateRoomView {
             <h1>${this.createRoom ? "Create room" : "Join room"}</h1>
             <form id="createRoomForm">
             <input id="roomName" placeholder="Room name" minlength="1" maxlength="36" required/> 
-            <input id="roomPassword" placeholder="Room password" minlength="4" maxlength="16" required/>
-            <button class="wide-button">Create</button>
+            <input id="roomPassword" type="password" placeholder="Room password" minlength="4" maxlength="16" required/>
+            <button class="wide-button">${this.createRoom ? "Create room" : "Join room"}</button>
             </form>
         </div>
     `;
@@ -24,6 +24,9 @@ export default class CreateRoomView {
             ev.preventDefault();
             room(this.createRoom);
         });
+
+        const footer = document.getElementsByTagName('footer')[0];
+        footer.style.display = 'flex';
     }
 }
 
