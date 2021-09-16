@@ -32,13 +32,6 @@ export default class ChatView {
         const messageInput = document.getElementById('messageInput');
         const sendMessageIcon = document.getElementById('sendMessageIcon');
 
-        // const innerIcon = document.getElementsByClassName('inner-icon')[0];
-        //
-        // innerIcon.addEventListener('click' , ()=>{
-        //     console.log('Call')
-        //     messageInput.focus();
-        // });
-
         let paste = false;
 
         messageInput.addEventListener('input', ev => {
@@ -60,17 +53,12 @@ export default class ChatView {
             paste = true;
         });
 
-        messageInput.addEventListener('focus', ev => {
-            console.log('focus')
-        });
-
-
         let lastHeight = document.documentElement.clientHeight;
 
         window.addEventListener('resize', ev => {
             const w = document.documentElement.clientHeight;
 
-            if (w < lastHeight){
+            if (w < lastHeight) {
                 messages.scrollTo(0, messages.scrollTop + (lastHeight - w))
             }
             lastHeight = w;
@@ -81,7 +69,8 @@ export default class ChatView {
         sendMessageIcon.onclick = () => {
             sendMessage(messageInput.value);
             messageInput.value = '';
-            auto_grow()
+            auto_grow();
+            messageInput.focus();
         }
 
         function auto_grow() {
@@ -138,6 +127,28 @@ export default class ChatView {
         });
 
         getMessages();
+
+
+        const pressedKeys = {}
+
+        messageInput.addEventListener('keydown', ev => {
+            pressedKeys[ev.key] = true;
+
+            if (pressedKeys['Enter'] && !pressedKeys['Shift']) {
+                sendMessage(messageInput.value);
+                messageInput.value = '';
+                auto_grow();
+                ev.preventDefault();
+            }
+
+        });
+
+        messageInput.addEventListener('keyup', ev => {
+            delete pressedKeys[ev.key];
+            console.log(ev.key);
+
+        });
+
 
     }
 }
