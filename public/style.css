@@ -48,7 +48,7 @@ i {
     cursor: pointer;
 }
 
-input:focus , textarea{
+input:focus, textarea {
     outline: none;
 }
 
@@ -179,19 +179,30 @@ footer > a:first-child {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .chat #messages {
     overflow-y: auto;
+    overflow-x: hidden;
     width: 50%;
     flex: 1;
-    white-space: pre-line;
+}
+
+.chat li{
+    margin-bottom: 10px;
+    background-color: var(--accent-color-brighter);
+    /*border: 1px solid black;*/
+}
+
+.chat ul{
+    white-space: pre-wrap;
 }
 
 .chat ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 0 20px 0 0;
     height: 0;
 }
 
@@ -202,31 +213,30 @@ footer > a:first-child {
 .inner-icon {
     position: relative;
     display: flex;
-    width: 50%;
-    justify-content: center;
     align-items: center;
+    width: 50%;
+    margin: 15px 0 40px 0;
+    border-radius: 10px;
+    gap: 10px;
 }
 
 .chat i {
     position: absolute;
-    bottom: 40px;
-    right: 0;
-    padding: 10px;
+    right: 5px;
 }
 
-.chat input  , .chat textarea{
+.chat input, .chat textarea {
     width: 100%;
     font-size: 1.3rem;
-    padding: 4px 40px 4px 4px;
-    margin-bottom: 40px;
-    border-radius: 50px;
+    padding: 5px;
+    border-radius: 10px;
     border: none;
     box-shadow: 0px 10px 25px 5px #0000000f;
     color: var(--primary-color);
     background-color: var(--accent-color-brighter);
 }
 
-.chat textarea{
+.chat textarea {
     resize: none;
 }
 
@@ -234,8 +244,24 @@ footer > a:first-child {
     display: none;
 }
 
+::-webkit-scrollbar {
+    width: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--accent-color-brighter);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
 /*****  Responsive  *****/
 @media (max-width: 700px) ,(max-height: 700px) {
+    ::-webkit-scrollbar {
+        width: 0.3em;
+    }
+
     .home {
         padding: 50px 0 0 0;
         font-size: 1.5rem;

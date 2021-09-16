@@ -12,7 +12,7 @@ export default class ChatView {
         <ul id="messagesList"></ul>
     </div>
     <div class="inner-icon">
-    <textarea id="messageInput" placeholder="Write a message" minlength="1" maxlength="256" required> </textarea>
+    <textarea id="messageInput" placeholder="Write a message" minlength="1" maxlength="256" required></textarea>
     <i id="sendMessageIcon" class="far fa-paper-plane"></i>
     </div>
 </div>
@@ -30,6 +30,7 @@ export default class ChatView {
         const messageInput = document.getElementById('messageInput');
         const sendMessageIcon = document.getElementById('sendMessageIcon');
 
+
         let paste = false;
 
         messageInput.addEventListener('input', ev => {
@@ -43,6 +44,8 @@ export default class ChatView {
 
                 paste = false;
             }
+
+            auto_grow();
         });
 
         messageInput.addEventListener('paste', ev => {
@@ -50,10 +53,19 @@ export default class ChatView {
         });
 
 
+        auto_grow();
+
         sendMessageIcon.onclick = () => {
             sendMessage(messageInput.value);
             messageInput.value = '';
+            auto_grow()
         }
+
+        function auto_grow() {
+            messageInput.style.height = "5px";
+            messageInput.style.height = Math.min(messageInput.scrollHeight, 150) + "px";
+        }
+
 
         socket.off('message');
         socket.off('messages');
@@ -65,7 +77,6 @@ export default class ChatView {
 
                 item.innerHTML = `${message.memberName}\n${message.content}`;
                 messagesList.appendChild(item);
-                console.log(messages.scrollHeight)
                 messages.scrollTo(0, messages.scrollHeight)
             }
         );
