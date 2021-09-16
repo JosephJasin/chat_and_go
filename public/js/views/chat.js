@@ -31,6 +31,7 @@ export default class ChatView {
         const messagesList = document.getElementById('messagesList');
         const messageInput = document.getElementById('messageInput');
         const sendMessageIcon = document.getElementById('sendMessageIcon');
+        const innerIcon = document.getElementsByClassName('inner-icon')[0];
 
         let paste = false;
 
@@ -55,12 +56,21 @@ export default class ChatView {
 
         let lastHeight = document.documentElement.clientHeight;
 
+        window.addEventListener('orientationchange' , ev=>{
+           lastHeight =  document.documentElement.clientHeight;
+        });
+
         window.addEventListener('resize', ev => {
             const w = document.documentElement.clientHeight;
 
             if (w < lastHeight) {
                 messages.scrollTo(0, messages.scrollTop + (lastHeight - w))
+                innerIcon.style.setProperty('padding-bottom', '5px');
+            } else if (innerIcon.style.getPropertyValue('padding-bottom') === '5px') {
+                innerIcon.style.setProperty('padding-bottom', '40px');
             }
+
+
             lastHeight = w;
         })
 
