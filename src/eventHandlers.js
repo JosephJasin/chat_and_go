@@ -11,8 +11,9 @@ function getRandName() {
     do {
         randName = uniqueNamesGenerator({
             dictionaries: [adjectives, animals, colors],
-            length: 3,
-            style: 'lowerCase'
+            length: 2,
+            style: 'lowerCase',
+            separator: ' ',
         });
     } while (randName.length > memberConfig.name.max)
 
