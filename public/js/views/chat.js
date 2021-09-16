@@ -22,6 +22,8 @@ export default class ChatView {
 
 
     init = () => {
+        const maxInputHeight = 150;
+
         const footer = document.getElementsByTagName('footer')[0];
         footer.style.display = 'none';
 
@@ -30,6 +32,12 @@ export default class ChatView {
         const messageInput = document.getElementById('messageInput');
         const sendMessageIcon = document.getElementById('sendMessageIcon');
 
+        // const innerIcon = document.getElementsByClassName('inner-icon')[0];
+        //
+        // innerIcon.addEventListener('click' , ()=>{
+        //     console.log('Call')
+        //     messageInput.focus();
+        // });
 
         let paste = false;
 
@@ -52,6 +60,21 @@ export default class ChatView {
             paste = true;
         });
 
+        messageInput.addEventListener('focus', ev => {
+            console.log('focus')
+        });
+
+
+        let lastHeight = document.documentElement.clientHeight;
+
+        window.addEventListener('resize', ev => {
+            const w = document.documentElement.clientHeight;
+
+            if (w < lastHeight){
+                messages.scrollTo(0, messages.scrollTop + (lastHeight - w))
+            }
+            lastHeight = w;
+        })
 
         auto_grow();
 
@@ -63,7 +86,10 @@ export default class ChatView {
 
         function auto_grow() {
             messageInput.style.height = "5px";
-            messageInput.style.height = Math.min(messageInput.scrollHeight, 150) + "px";
+            messageInput.style.height = Math.min(messageInput.scrollHeight, maxInputHeight) + "px";
+
+            if (messages.scrollHeight - (messages.offsetHeight + messages.scrollTop) <= maxInputHeight)
+                messages.scrollTo(0, messages.scrollHeight)
         }
 
 
