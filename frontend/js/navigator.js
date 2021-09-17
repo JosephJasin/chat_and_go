@@ -3,6 +3,7 @@ import HomeView from "./views/home.js";
 import ChatView from "./views/chat.js";
 
 const app = document.getElementById('app');
+const footer = document.getElementsByTagName('footer')[0];
 
 export default function navigateTo(url) {
     history.pushState(null, null, url);
@@ -27,15 +28,23 @@ function router() {
         default:
             view = new HomeView();
     }
+
     app.style.setProperty('opacity', '0');
 
     setTimeout(() => {
+        hideShowFooter(view);
         app.innerHTML = view.getHtml();
         view.init();
         app.style.setProperty('opacity', '1');
-    }, 300)
+    }, 300);
+}
+
+function hideShowFooter(view) {
+    if (view instanceof ChatView)
+        footer.style.display = 'none';
+    else if (footer.style.display === 'none')
+        footer.style.display = 'flex';
 }
 
 window.addEventListener('popstate', router);
 document.addEventListener("DOMContentLoaded", router);
-

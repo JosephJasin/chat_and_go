@@ -24,22 +24,13 @@ socket.on('error', error => {
     }, 4000);
 })
 
-export function room(createRoom = true) {
-    const roomName = document.getElementById('roomName').value.trim();
-    const password = document.getElementById('roomPassword').value.trim();
-
+export function room(createRoom = true, roomName, roomPassword) {
     if (!createRoom && localStorage.getItem('roomName') === roomName
-        && localStorage.getItem('roomPassword') === password) {
+        && localStorage.getItem('roomPassword') === roomPassword) {
 
         reconnect(true);
-
-    } else {
-        socket.emit('room', {
-            createRoom,
-            roomName: roomName,
-            roomPassword: password
-        });
-    }
+    } else
+        socket.emit('room', {createRoom, roomName, roomPassword});
 }
 
 if (localStorage.getItem('memberId'))
@@ -79,5 +70,3 @@ export function getMessages(lastId = undefined) {
         memberName: localStorage.getItem('memberName'),
     });
 }
-
-

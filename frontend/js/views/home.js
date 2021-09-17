@@ -17,10 +17,10 @@ export default class HomeView {
      `;
 
     init = () => {
-        const createRoomButton = document.getElementById('createRoomButton');
-        const joinRoomButton = document.getElementById('joinRoomButton');
+        document.getElementById('createRoomButton')
+            .onclick = () => navigateTo('/createRoom');
 
-        createRoomButton.onclick = () => navigateTo('/createRoom');
-        joinRoomButton.onclick = () => navigateTo('/joinRoom');
+        document.getElementById('joinRoomButton')
+            .onclick = () => navigateTo('/joinRoom');
     }
 }

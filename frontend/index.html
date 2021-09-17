@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Home</title>
+
+    <script src="https://kit.fontawesome.com/7245f4979f.js" crossorigin="anonymous"></script>
+    <script src="js/darkMode.js"></script>
+</head>
+<body>
+<header>
+    Chat And Go
+    <i class='far fa-moon' onclick="toggleDarkMode()"></i>
+</header>
+
+<section id="app"></section>
+
+<footer>
+    <a href="https://github.com/JosephJasin" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/joseph-jasin/" target="_blank"><i class="fab fa-linkedin"></i></a>
+</footer>
+
+<div id="snackbar"></div>
+
+<!--TODO: In production change this line-->
+<script src="socket.io/socket.io.js"></script>
+<!--to-->
+<!--<script src="/socket.io/socket.io.min.js"></script>-->
+
+<script type="module" src="js/socket_io.js"></script>
+<script type="module" src="js/navigator.js"></script>
+</body>
+</html>
