@@ -2,9 +2,9 @@ const {uniqueNamesGenerator, adjectives, colors, animals} = require('unique-name
 
 const {member: memberConfig} = require('config');
 
-const Room = require("../models/room.js");
-const Member = require("../models/member.js");
-const Message = require('../models/message.js');
+const Room = require("./models/room.js");
+const Member = require("./models/member.js");
+const Message = require('./models/message.js');
 
 function getRandName() {
     let randName;

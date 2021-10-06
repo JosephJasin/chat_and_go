@@ -1,7 +1,7 @@
 /*****  Common  *****/
 * {
     font-family: 'Rubik', sans-serif;
-    transition: background-color 0.5s, opacity 0.5s;
+    transition: background-color 0.3s, opacity 0.3s;
     box-sizing: border-box;
 }
 
@@ -214,7 +214,7 @@ footer > a:first-child {
     color:gray;
 }
 
-.inner-icon {
+.input-with-icon {
     position: relative;
     display: flex;
     align-items: center;
@@ -289,7 +289,7 @@ footer > a:first-child {
         font-size: 1.1rem;
     }
 
-    .chat #messages, .inner-icon {
+    .chat #messages, .input-with-icon {
         width: 95%;
     }
 }
