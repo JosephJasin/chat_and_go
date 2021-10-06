@@ -227,12 +227,13 @@ footer > a:first-child {
 .chat i {
     position: absolute;
     right: 5px;
+    padding: 10px;
 }
 
-.chat input, .chat textarea {
+.chat textarea {
     width: 100%;
     font-size: 1.3rem;
-    padding: 5px 30px 5px 5px;
+    padding: 12px 40px 12px 12px;
     border-radius: 10px;
     border: none;
     box-shadow: 0px 10px 25px 5px #0000000f;
