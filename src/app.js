@@ -25,10 +25,10 @@ if (process.env.NODE_ENV === 'development') {
     app.use(connectLiveReload());
 }
 
-app.use(express.static('frontend'));
+app.use(express.static('public'));
 
 app.get('/*' , (req, res) => {
-    res.sendFile(rootDir + '/frontend/index.html');
+    res.sendFile(rootDir + '/public/index.html');
 })
 
 io.on('connection', socket => {
