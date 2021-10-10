@@ -34,16 +34,13 @@ if (process.env.NODE_ENV === 'development') {
 
     app.use(connectLiveReload());
 }
-
-app.use(express.static('public'));
-
 app.enable('trust proxy');
-
 app.use((req, res, next) => {
     req.secure ? next() :
         res.redirect('https://' + req.headers.host + req.url)
 });
 
+app.use(express.static('public'));
 
 app.get('/*', (req, res) => {
     res.sendFile(rootDir + '/public/index.html');
