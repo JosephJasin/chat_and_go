@@ -1,5 +1,6 @@
 {
-  "port": 80,
+  "httpsPort": 443,
+  "httpPort": 80,
   "db": {
     "database": "chat_and_go",
     "host": "localhost",
