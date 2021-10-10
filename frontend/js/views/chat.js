@@ -79,7 +79,7 @@ export default class ChatView {
             if (ev.key === 'Enter') isEnterKeyDown = true;
             if (ev.key === 'Shift') isShiftKeyDown = true;
 
-            if (isEnterKeyDown && !isShiftKeyDown) {
+            if (isEnterKeyDown && isShiftKeyDown) {
                 send();
                 ev.preventDefault();
             }
